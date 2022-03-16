@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.stupkalex.composition.R
 import com.stupkalex.composition.databinding.FragmentChooseLevelBinding
 import com.stupkalex.composition.domain.entity.Level
@@ -48,19 +49,9 @@ class ChooseLevelFragment : Fragment() {
     }
 
     private fun launchGameFragment(level: Level) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, GameFragment.getInstance(level))
-            .addToBackStack(GameFragment.NAME)
-            .commit()
 
-    }
+        findNavController().navigate(ChooseLevelFragmentDirections
+            .actionChooseLevelFragmentToGameFragment(level))
 
-    companion object {
-
-        const val NAME = "ChooseLevelFragment"
-
-        fun getInstance(): ChooseLevelFragment {
-            return ChooseLevelFragment()
-        }
     }
 }
