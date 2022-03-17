@@ -41,43 +41,7 @@ class GameFinishedFragment : Fragment() {
     }
 
     private fun launchView() {
-        with(binding) {
-            tvRequiredAnswers.text = String.format(
-                requireContext().resources.getString(R.string.required_score),
-                args.gameResult.gameSetting.minCountOfRightAnswer
-            )
-            tvScoreAnswers.text = String.format(
-                requireContext().resources.getString(R.string.score_answers),
-                args.gameResult.countOfRightAnswer
-            )
-            tvRequiredPercentage.text = String.format(
-                requireContext().resources.getString(R.string.required_percentage),
-                args.gameResult.gameSetting.minPercentOfRightAnswer
-            )
-            tvScorePercentage.text = String.format(
-                requireContext().resources.getString(R.string.score_percentage),
-                getPercentRightAnswer()
-            )
-            emojiResult.setImageDrawable(
-                setSmileByWinner()
-            )
-        }
-    }
-
-    private fun setSmileByWinner(): Drawable? {
-        return if (args.gameResult.winner) {
-            requireContext().resources.getDrawable(R.drawable.ic_smile)
-        } else {
-            requireContext().resources.getDrawable(R.drawable.ic_sad)
-        }
-    }
-
-    private fun getPercentRightAnswer(): Int {
-        if (args.gameResult.countOfQuestion == 0) {
-            return 0
-        }
-        return ((args.gameResult.countOfRightAnswer / args.gameResult.countOfQuestion.toDouble()) * 100)
-            .toInt()
+        binding.gameResult = args.gameResult
     }
 
     override fun onDestroyView() {

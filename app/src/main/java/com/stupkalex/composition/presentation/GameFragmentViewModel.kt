@@ -122,6 +122,14 @@ class GameFragmentViewModel(private val application: Application,
         _enoughPercent.value = percent >= gameSetting.minPercentOfRightAnswer
     }
 
+    fun setProgressText(){
+        _progressAnswer.value = String.format(
+            application.resources.getString(R.string.progress_answers),
+            countOfRightAnswer,
+            gameSetting.minCountOfRightAnswer
+        )
+    }
+
     private fun calculatePercentOfRightAnswer(): Int {
         if (countQuestion == 0) {
             return 0
